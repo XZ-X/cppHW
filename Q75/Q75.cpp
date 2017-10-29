@@ -2,8 +2,15 @@
 #include"xxzString.h"
 #include"list.h"
 #include"tree.h"
+
+#define getParent(x) (((x+1)>>1) - 1)
+#define getLc(x) (((x+1)<<1) - 1)
+#define getRc(x) ((x + 1) << 1) 
+#define isValid(x) ((x)>=0&&(x)<=cnt-1)
+
 using namespace std;
 bool isFirst = true;
+/*
 void midOrder(treeNode<xxzString>* root){
 	if (root->lc){
 		midOrder(root->lc);
@@ -22,16 +29,7 @@ void midOrder(treeNode<xxzString>* root){
 inline bool finish(){
 	return cin.peek() == '\n';
 }
-#include<fstream>
-int main(){
-	ofstream s("file1");
-	xxzString st;
-	while (!finish()&&cin >> st){
-		s << st;
-	}
-}
 
-/*
 int main(){
 	xxzString str;
 	treeNode<xxzString> root;
@@ -86,3 +84,53 @@ int main(){
 	return 0;
 }
 */
+
+xxzString src[100000];
+int cnt=0;
+void p(int i){
+	if (!(src[i] == "null")){
+		if (isFirst){
+			cout << src[i];
+			isFirst = false;
+		}
+		else{
+			cout << " " << src[i];
+		}
+	}
+}
+
+inline bool finish(){
+	return cin.peek() == '\n' || cin.peek() == EOF;
+}
+
+int main(){
+	while (!finish()){
+		cin >> src[cnt++];
+	}
+	int i = 0;
+	list<int> roots;
+	while (true){
+		if (isValid(getLc(i))){
+			roots.pushValue(i);
+			i = getLc(i);
+		}
+		else {
+			p(i);
+			if (isValid(getRc(i))){
+				i = getRc(i);
+			}
+			else if(!roots.empty()){
+				i = roots.pop();
+				p(i);
+				i = getRc(i);
+			}
+			else{
+				break;
+			}
+			
+		}
+		if (!isValid(i))
+			break;
+	}
+	return 0;
+}

@@ -30,6 +30,14 @@ bool xxzString::operator==(const xxzString& s)const{
 	return true;
 }
 
+bool xxzString::operator==(const char* s)const{
+	for (int i = 0; s[i] * str[i] != 0; i++){
+		if (str[i] != s[i]){
+			return false;
+		}
+	}
+	return true;
+}
 
 xxzString& xxzString::operator=(const xxzString& s){
 	str = new char[s.__size];

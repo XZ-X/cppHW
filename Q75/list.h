@@ -101,7 +101,7 @@ public:
 
 	T pop(){
 		if (empty()){
-			return nullptr;
+			return __tail->previous->data;
 		}
 		auto ret = __tail->previous->data;
 		__tail->previous = __tail->previous->previous;
@@ -130,6 +130,16 @@ public:
 	void push(T& t){
 		auto tmp = new node<T>(t);
 		//tmp->data = t;
+		__tail->previous->next = tmp;
+		tmp->previous = __tail->previous;
+		tmp->next = __tail;
+		__tail->previous = tmp;
+		__length++;
+	}
+
+	void pushValue(T t){
+		auto tmd = new T(t);
+		auto tmp = new node<T>(*tmd);
 		__tail->previous->next = tmp;
 		tmp->previous = __tail->previous;
 		tmp->next = __tail;

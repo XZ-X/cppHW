@@ -17,6 +17,7 @@ public:
 	}
 	//operator
 	bool operator==(const xxzString& str)const ;
+	bool xxzString::operator==(const char* s)const;
 	xxzString& operator=(const xxzString& str);
 
 	//friends
