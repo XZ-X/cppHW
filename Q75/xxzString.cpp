@@ -18,6 +18,7 @@ xxzString::xxzString(const xxzString& s){
 	memcpy(str, s.str, __size);
 }
 
+
 bool xxzString::operator==(const xxzString& s)const{
 	if (s.__size != __size){
 		return false;
